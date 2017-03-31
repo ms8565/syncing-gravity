@@ -18,10 +18,12 @@ const keyDownHandler = (e) => {
   // A OR LEFT
   if(keyPressed === 65 || keyPressed === 37) {
     square.moveLeft = true;
+    square.moveRight = false;
   }
   // D OR RIGHT
   else if(keyPressed === 68 || keyPressed === 39) {
     square.moveRight = true;
+    square.moveLeft = false;
   }
 };
 

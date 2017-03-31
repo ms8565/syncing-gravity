@@ -26,6 +26,7 @@ class Player {
     this.fallSpeed = 1;
     this.maxVelocity = 2;
     this.velocityY = 0;
+    
   }
   updateForces(){
       this.velocityY += this.fallSpeed;

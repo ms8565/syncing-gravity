@@ -59,7 +59,9 @@ const setupSockets = (ioServer) => {
       // update timestamp of last change for this character
       players[socket.hash].lastUpdate = new Date().getTime();
       
+      
       // update physics
+      //players[socket.hash].updateForces();
       if(players[socket.hash].y < 390){
         players[socket.hash].velocityY += players[socket.hash].fallSpeed;
       }
@@ -77,6 +79,7 @@ const setupSockets = (ioServer) => {
         
         console.log('jump');
         
+        //players[socket.hash].jump();
         players[socket.hash].velocityY += players[socket.hash].jumpHeight;
         io.sockets.in('room1').emit('updatedMovement', players[socket.hash]);
     });

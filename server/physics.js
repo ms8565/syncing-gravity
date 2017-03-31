@@ -57,7 +57,7 @@ const updatePhysics = () => {
     const keys = Object.keys(playerList);
     const players = playerList;
     for (let i = 0; i < keys.length; i++) {
-
+        
     }
 }
 

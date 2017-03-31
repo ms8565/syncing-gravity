@@ -23,8 +23,6 @@ const update = (data) => {
   square.direction = data.direction;
   square.moveLeft = data.moveLeft;
   square.moveRight = data.moveRight;
-  square.moveDown = data.moveDown;
-  square.moveUp = data.moveUp;
   square.velocityY = data.velocityY;
   square.alpha = 0.05;
 };
@@ -64,21 +62,15 @@ const updatePosition = () => {
   if(square.destY <= 0) square.destY = 1;
   if(square.destY >= 400) square.destY = 399;
 
-  //if user is moving up, decrease y
-  /*if(square.moveUp && square.destY > 0) {
-    square.destY -= 2;
-  }
-  //if user is moving down, increase y
-  if(square.moveDown && square.destY < 400) {
-    square.destY += 2;
-  }*/
   //if user is moving left, decrease x
   if(square.moveLeft && square.destX > 0) {
+    console.log("moving left");
     square.destX -= 2;
   }
   //if user is moving right, increase x
   if(square.moveRight && square.destX < 400) {
-    square.destX += 2;
+    console.log("moving right");
+      square.destX += 2;
   }
 
   //determine direction based on the inputs of direction keys
