@@ -40,7 +40,7 @@ const keyUpHandler = (e) => {
   }
   //Space key was lifted
   else if(keyPressed === 32) {
-    sendAttack(); //call to invoke an attack
+    sendJump();
   }
 };
 

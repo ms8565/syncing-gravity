@@ -54,6 +54,11 @@ const setPlayer = (player) => {
 
 const updatePhysics = () => {
     checkPlayerCollisions();
+    const keys = Object.keys(playerList);
+    const players = playerList;
+    for (let i = 0; i < keys.length; i++) {
+
+    }
 }
 
 //Update players every 20ms

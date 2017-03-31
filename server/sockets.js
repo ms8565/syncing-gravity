@@ -58,12 +58,27 @@ const setupSockets = (ioServer) => {
         
       // update timestamp of last change for this character
       players[socket.hash].lastUpdate = new Date().getTime();
-        
+      
       // update physics
+      if(players[socket.hash].y < 390){
+        players[socket.hash].velocityY += players[socket.hash].fallSpeed;
+      }
+      if(players[socket.hash].velocityY > players[socket.hash].maxVelocity){
+          players[socket.hash].velocityY = players[socket.hash].maxVelocity;
+      }
       physics.setPlayer(players[socket.hash]);
 
       //Update other players with movement
       io.sockets.in('room1').emit('updatedMovement', players[socket.hash]);
+    });
+      
+    socket.on('jump', (sock) => {
+        const socket = sock;
+        
+        console.log('jump');
+        
+        players[socket.hash].velocityY += players[socket.hash].jumpHeight;
+        io.sockets.in('room1').emit('updatedMovement', players[socket.hash]);
     });
 
     socket.on('disconnect', () => {

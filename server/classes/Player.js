@@ -22,6 +22,17 @@ class Player {
     this.moveRight = false; // if character is moving right
     this.moveDown = false; // if character is moving down
     this.moveUp = false; // if character is moving up
+    this.jumpHeight = -10;
+    this.fallSpeed = 1;
+    this.maxVelocity = 2;
+    this.velocityY = 0;
+  }
+  updateForces(){
+      this.velocityY += this.fallSpeed;
+      if(this.velocityY > this.maxVelocity) this.velocityY = this.maxVelocity;
+  }
+  jump(){
+      this.velocityY += this.jumpHeight;
   }
 }
 
