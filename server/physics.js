@@ -1,7 +1,7 @@
 'use strict'
 
 // our socket code for physics to send updates back
-const sockets = require('./sockets.js');
+//const sockets = require('./sockets.js');
 
 let playerList = {}; // list of Players
 
@@ -54,8 +54,8 @@ const setPlayer = (player) => {
 
 const updatePhysics = () => {
     checkPlayerCollisions();
-    const keys = Object.keys(playerList);
-    const players = playerList;
+    //const keys = Object.keys(playerList);
+    //const players = playerList;
     //for (let i = 0; i < keys.length; i++) {
         
     //}

@@ -15,7 +15,7 @@ let io;
 // Possible directions a user can move
 // their character. These are mapped
 // to integers for fast/small storage
-const directions = {
+/*const directions = {
   DOWNLEFT: 0,
   DOWN: 1,
   DOWNRIGHT: 2,
@@ -24,7 +24,7 @@ const directions = {
   RIGHT: 5,
   UPRIGHT: 6,
   UP: 7,
-};
+};*/
 
 
 // function to setup our socket server
@@ -74,8 +74,7 @@ const setupSockets = (ioServer) => {
       io.sockets.in('room1').emit('updatedMovement', players[socket.hash]);
     });
       
-    socket.on('jump', (sock) => {
-        const socket = sock;
+    socket.on('jump', () => {
         
         console.log('jump');
         
