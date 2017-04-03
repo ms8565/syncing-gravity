@@ -16,12 +16,14 @@ const keyDownHandler = (e) => {
   const square = squares[hash];
 
   // A OR LEFT
-  else if(keyPressed === 65 || keyPressed === 37) {
+  if(keyPressed === 65 || keyPressed === 37) {
     square.moveLeft = true;
+    square.moveRight = false;
   }
   // D OR RIGHT
   else if(keyPressed === 68 || keyPressed === 39) {
     square.moveRight = true;
+    square.moveLeft = false;
   }
 };
 
@@ -31,7 +33,7 @@ const keyUpHandler = (e) => {
   const square = squares[hash];
 
   // A OR LEFT
-  else if(keyPressed === 65 || keyPressed === 37) {
+  if(keyPressed === 65 || keyPressed === 37) {
     square.moveLeft = false;
   }
   // D OR RIGHT
@@ -40,7 +42,7 @@ const keyUpHandler = (e) => {
   }
   //Space key was lifted
   else if(keyPressed === 32) {
-    sendAttack(); //call to invoke an attack
+    sendJump();
   }
 };
 

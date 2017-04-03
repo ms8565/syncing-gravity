@@ -7,12 +7,6 @@ const update = (data) => {
     return;
   }
 
-  //if the update is for our own character (we dont need it)
-  //Although, it could be used for player validation
-  if(data.hash === hash) {
-    return;
-  }
-
   //if we received an old message, just drop it
   if(squares[data.hash].lastUpdate >= data.lastUpdate) {
     return;
@@ -29,8 +23,7 @@ const update = (data) => {
   square.direction = data.direction;
   square.moveLeft = data.moveLeft;
   square.moveRight = data.moveRight;
-  square.moveDown = data.moveDown;
-  square.moveUp = data.moveUp;
+  square.velocityY = data.velocityY;
   square.alpha = 0.05;
 };
 
@@ -49,6 +42,13 @@ const setUser = (data) => {
   requestAnimationFrame(redraw); //start animating
 };
 
+const sendJump = () => {
+  const square = squares[hash];
+  
+  //send request to server
+  socket.emit('jump', square);
+};
+
 //update this user's positions based on keyboard input
 const updatePosition = () => {
   const square = squares[hash];
@@ -56,26 +56,25 @@ const updatePosition = () => {
   //move the last x/y to our previous x/y variables
   square.prevX = square.x;
   square.prevY = square.y;
+  
+  console.log(square.velocityY);
+  square.destY+= square.velocityY;
+  if(square.destY <= 0) square.destY = 1;
+  if(square.destY >= 400) square.destY = 399;
 
-  //if user is moving up, decrease y
-  if(square.moveUp && square.destY > 0) {
-    square.destY -= 2;
-  }
-  //if user is moving down, increase y
-  if(square.moveDown && square.destY < 400) {
-    square.destY += 2;
-  }
   //if user is moving left, decrease x
   if(square.moveLeft && square.destX > 0) {
+    console.log("moving left");
     square.destX -= 2;
   }
   //if user is moving right, increase x
   if(square.moveRight && square.destX < 400) {
-    square.destX += 2;
+    console.log("moving right");
+      square.destX += 2;
   }
 
   //determine direction based on the inputs of direction keys
-  if(square.moveUp && square.moveLeft) square.direction = directions.UPLEFT;
+  /*if(square.moveUp && square.moveLeft) square.direction = directions.UPLEFT;
 
   if(square.moveUp && square.moveRight) square.direction = directions.UPRIGHT;
 
@@ -85,11 +84,11 @@ const updatePosition = () => {
 
   if(square.moveDown && !(square.moveRight || square.moveLeft)) square.direction = directions.DOWN;
 
-  if(square.moveUp && !(square.moveRight || square.moveLeft)) square.direction = directions.UP;
+  if(square.moveUp && !(square.moveRight || square.moveLeft)) square.direction = directions.UP;*/
 
-  if(square.moveLeft && !(square.moveUp || square.moveDown)) square.direction = directions.LEFT;
+  if(square.moveLeft) square.direction = directions.LEFT;
 
-  if(square.moveRight && !(square.moveUp || square.moveDown)) square.direction = directions.RIGHT;
+  if(square.moveRight) square.direction = directions.RIGHT;
 
   //reset this character's alpha so they are always smoothly animating
   square.alpha = 0.05;
